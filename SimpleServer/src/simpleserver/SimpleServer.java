@@ -7,11 +7,12 @@ package simpleserver;
 
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class SimpleServer {
     public static void main(String args[]) {
         ServerSocket s = null;
-
+        Scanner input = new Scanner(System.in);
         // Register your service on port 5432
         try {
             s = new ServerSocket(5432);
@@ -35,7 +36,10 @@ public class SimpleServer {
 
                 // Send your string!
                 System.out.println("Sending data...");
-                dos.writeUTF("Hello Net World!");
+                
+                dos.writeUTF(input.nextLine());
+
+                dos.flush();
 
                 // Close the connection, but not the server socket
                 dos.close();
