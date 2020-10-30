@@ -11,10 +11,10 @@ import java.io.*;
 public class SimpleClient {
     public static void main(String args[]) {
         try {
-            // Open your connection to a server, at port 5432
+            // Open your connection to a server, at port 5433
             // localhost used here
-            Socket s1 = new Socket("localhost", 5432);
-            System.out.println("Connection established at port 5432");
+            Socket s1 = new Socket("192.168.18.24", 5433);
+            System.out.println("Connection established at port 5433");
 
             // Get an input stream from the socket
             InputStream is = s1.getInputStream();

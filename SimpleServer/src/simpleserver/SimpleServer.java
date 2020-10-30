@@ -23,7 +23,35 @@ public class SimpleServer {
         }
 
         // Run the listen/accept loop forever
-        while (true) {
+        while (true) {try {
+            // Open your connection to a server, at port 5433
+            // localhost used here
+            Socket s1 = new Socket("192.168.18.24", 5433);
+            System.out.println("Connection established at port 5433");
+
+            // Get an input stream from the socket
+            InputStream is = s1.getInputStream();
+            // Decorate it with a "data" input stream
+            DataInputStream dis = new DataInputStream(is);
+            System.out.println("Getting data...");
+
+            // Read the input and print it to the screen
+            System.out.println("\n"+dis.readUTF()+"\n");
+
+            // When done, just close the stream and connection
+            dis.close();
+            s1.close();
+            System.out.println("Connection closed.");
+        }
+        catch (ConnectException connExcep) {
+            System.out.println("Error: " + connExcep.getMessage());
+        }
+        catch (IOException ioExcep) {
+            System.out.println("Error: " + ioExcep.getMessage());    
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
             try {
                 // Wait here and listen for a connection
                 System.out.println("Server running...listening for a connection...");
@@ -37,7 +65,7 @@ public class SimpleServer {
                 // Send your string!
                 System.out.println("Sending data...");
                 
-                dos.writeUTF(input.nextLine());
+                dos.writeUTF("\n"+input.nextLine()+"\n");
 
                 dos.flush();
 
